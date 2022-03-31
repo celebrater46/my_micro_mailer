@@ -24,7 +24,7 @@ function send_mail($subject, $msg){
     }
 }
 
-send_mail(SUBJECT, get_test_msg());
+//send_mail(SUBJECT, get_test_msg()); // For test
 
 ?>
 
