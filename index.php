@@ -2,24 +2,35 @@
 
 namespace my_micro_mailer;
 
-const MAILTO = "to@gmail.com";
+require_once "init.php";
+
+//const MAILTO = "to@gmail.com";
 const SUBJECT = "Thank you for the test";
 
-$content = "This is the test sending from a rental server.\n";
-$content .= "Sent the mail successfully if you read this.\n";
-$content .= "This mail was sent at " . date('Y/m/d H:i:s') . ".";
-
-$headers = <<<HEAD
-From : from@gmail.com
-Return-Path: to@gmail.com
-Content-Type: text/plain;charset=ISO-2022-JP
-HEAD;
-
-$is_success = mb_send_mail(MAILTO, SUBJECT, $content, $headers);
-
-if(!$is_success) {
-    die('Sending failed.');
+function get_test_msg(){
+    $msg = "This is the test sending from a rental server.\n";
+    $msg .= "Sent the mail successfully if you read this.\n";
+    $msg .= "This mail was sent at " . date('Y/m/d H:i:s') . ".";
+    return $msg;
 }
+
+function send_mail($subject, $msg){
+//    $headers = <<<HEAD
+//From : from@gmail.com
+//Return-Path: to@gmail.com
+//Content-Type: text/plain;charset=ISO-2022-JP
+//HEAD;
+    $headers = "From: " . MMM_FROM . "\n";
+    $headers .= "Return-Path: " . MMM_TO . "\n";
+    $headers .= "Content-Type: text/plain;charset=ISO-2022-JP";
+
+    $is_success = mb_send_mail(MMM_TO, $subject, $msg, $headers);
+    if(!$is_success) {
+        die('Sending failed.');
+    }
+}
+
+send_mail(SUBJECT, get_test_msg());
 
 ?>
 
