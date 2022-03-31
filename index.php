@@ -4,7 +4,6 @@ namespace my_micro_mailer;
 
 require_once "init.php";
 
-//const MAILTO = "to@gmail.com";
 const SUBJECT = "Thank you for the test";
 
 function get_test_msg(){
@@ -15,11 +14,6 @@ function get_test_msg(){
 }
 
 function send_mail($subject, $msg){
-//    $headers = <<<HEAD
-//From : from@gmail.com
-//Return-Path: to@gmail.com
-//Content-Type: text/plain;charset=ISO-2022-JP
-//HEAD;
     $headers = "From: " . MMM_FROM . "\n";
     $headers .= "Return-Path: " . MMM_TO . "\n";
     $headers .= "Content-Type: text/plain;charset=ISO-2022-JP";
